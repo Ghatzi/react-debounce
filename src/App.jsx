@@ -1,19 +1,19 @@
-import SearchInput from "./components/SearchInput"
-import List from "./components/List"
-import { useState } from "react"
+import { useState } from 'react';
+import List from './components/List';
+import SearchInput from './components/SearchInput';
+import useDebounce from './hooks/useDebounce';
 
 function App() {
-  const [searchValue, setSearchValue] = useState('')
+  const [searchValue, setSearchValue] = useState('');
+
+  const debouncedSearchValue = useDebounce(searchValue, 1000);
 
   return (
     <>
-      <SearchInput
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
-      <List searchTerm={searchValue} />
+      <SearchInput searchValue={searchValue} setSearchValue={setSearchValue} />
+      <List searchTerm={debouncedSearchValue} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
